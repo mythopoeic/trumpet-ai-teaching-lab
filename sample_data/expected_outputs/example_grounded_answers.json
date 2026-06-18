@@ -1,0 +1,22 @@
+[
+  {
+    "id": "q1",
+    "question": "How should I think about efficient trumpet sound production?",
+    "expected_points": [
+      "Coordinated air, tongue, embouchure, and resonance rather than mouthpiece pressure",
+      "Emphasis on a centered, focused sound over raw volume"
+    ],
+    "grounded_in": "sample_data/sources/callet_inspired_sample_notes.md",
+    "note": "Synthetic expected-answer used to demonstrate the evaluation harness; not authoritative pedagogy."
+  },
+  {
+    "id": "q2",
+    "question": "What is a sensible way to extend my upper register safely?",
+    "expected_points": [
+      "Extend gradually only as far as the tone stays clear and focused",
+      "Avoid forcing past where the sound spreads or strains"
+    ],
+    "grounded_in": "sample_data/sources/callet_inspired_sample_notes.md",
+    "note": "Synthetic."
+  }
+]
