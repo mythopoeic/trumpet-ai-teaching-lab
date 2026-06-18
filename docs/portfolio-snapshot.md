@@ -16,6 +16,7 @@ private and copyrighted material.
 | Diagnostic rubrics & calibration (spit-buzz / tone / double-pedal scoring thresholds, calibration distributions) | Proprietary. Scorers/detectors reduced to documented skeletons; feature-extraction retained. |
 | Ingestion / scraping / vision / audio-evaluation pipeline | Assumes private source materials; references private paths. Removed. |
 | Internal tooling (autonomous-agent orchestration, ML training/dataset tooling, maintenance/query scripts), product roadmap/PRDs, internal agent docs | Not portfolio-relevant; reveal private workflow. Removed. |
+| Production evaluation ("golden") set | Its reference answers were derived from copyrighted books and curated to the private system. Removed; the evaluation runner falls back to a small **synthetic** set at `sample_data/eval/example_eval_set.json` (or exits gracefully if absent). |
 
 ## What is retained (engineering signal)
 
@@ -28,7 +29,9 @@ private and copyrighted material.
   `spectral_features.py`) with the scoring rubrics withheld.
 - **Prompt-assembly architecture** (shared + per-era + retrieved-context layers)
   via skeleton prompts.
-- **Evaluation harness** structure (`tests/evaluation`).
+- **Evaluation harness** structure (`tests/evaluation`) — the LLM-as-judge
+  runner. The production golden set is omitted, so it runs against the synthetic
+  `sample_data/eval/` set (and exits gracefully if no set is present).
 - Privacy/rights-aware design, `.env.example`, synthetic `sample_data/`, and
   architecture docs.
 

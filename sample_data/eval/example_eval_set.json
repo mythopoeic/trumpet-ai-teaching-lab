@@ -1,0 +1,26 @@
+{
+  "_note": "Synthetic evaluation set for the public portfolio snapshot. The production golden set is intentionally excluded. These questions are generic and contain no private or copyrighted content.",
+  "questions": [
+    {
+      "id": "s1",
+      "question": "How should I think about efficient trumpet sound production?",
+      "era": "General",
+      "acceptable_eras": ["General", "TCE"],
+      "category": "sound"
+    },
+    {
+      "id": "s2",
+      "question": "What is a sensible way to extend the upper register safely?",
+      "era": "General",
+      "acceptable_eras": ["General", "TCE"],
+      "category": "range"
+    },
+    {
+      "id": "s3",
+      "question": "Why are long tones and lip slurs useful for a developing player?",
+      "era": "General",
+      "acceptable_eras": ["General"],
+      "category": "fundamentals"
+    }
+  ]
+}

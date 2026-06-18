@@ -9,19 +9,48 @@ Run from teaching-engine/ directory:
 import argparse
 import json
 import os
+import sys
 import time
 import urllib.request
 import urllib.error
 from datetime import datetime
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# Production golden set (excluded from the public portfolio snapshot).
 GOLDEN_TEST_FILE = os.path.join(SCRIPT_DIR, "golden_test_set.json")
+# Synthetic fallback shipped in the public snapshot (no private content).
+_REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
+SAMPLE_EVAL_FILE = os.path.join(
+    _REPO_ROOT, "sample_data", "eval", "example_eval_set.json"
+)
 RESULTS_DIR = os.path.join(SCRIPT_DIR, "results")
 
 
 def load_test_set():
-    with open(GOLDEN_TEST_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+    """Load the evaluation question set.
+
+    Prefers the production golden set when present; in the public portfolio
+    snapshot that file is intentionally excluded, so this falls back to the
+    synthetic sample set under sample_data/eval/. If neither exists, exits
+    gracefully with a clear message rather than raising.
+    """
+    if os.path.exists(GOLDEN_TEST_FILE):
+        with open(GOLDEN_TEST_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    if os.path.exists(SAMPLE_EVAL_FILE):
+        print(
+            "Production golden evaluation set is excluded from this public "
+            "portfolio snapshot; using the synthetic sample set "
+            "(sample_data/eval/example_eval_set.json)."
+        )
+        with open(SAMPLE_EVAL_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    print(
+        "No evaluation set found. The production golden set is excluded from "
+        "this public portfolio snapshot and no synthetic sample set is present. "
+        "See docs/portfolio-snapshot.md."
+    )
+    sys.exit(0)
 
 
 def send_question(base_url, question_text):
